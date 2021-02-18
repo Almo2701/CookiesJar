@@ -1,0 +1,64 @@
+<hr class="my-4">
+<h1 class="h2" style="margin: auto;">Formulario de Empleados</h1>
+<hr class="my-4">
+<div class="container">
+
+  <div class="row g-3" style="margin: auto;">
+
+    <div class="col-md-7 col-lg-8">
+
+      <form [formGroup]="EmpleadoForm">
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <label class="form-label">Nombre</label>
+            <input class="form-control" placeholder="Ingrese un nombre" value="" required formControlName="nombre">
+            <div class="text-danger" *ngIf="isValidField('nombre')">
+              {{getErrorMessage("nombre")}}
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <label class="form-label">Apellido</label>
+            <input class="form-control" formControlName="apellido" placeholder="Ingrese un apellido" value="" required>
+            <div class="text-danger" *ngIf="isValidField('apellido')">
+              {{getErrorMessage("apellido")}}
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Telefono</label>
+            <input class="form-control" formControlName="telefono" placeholder="856-996-9969" required>
+            <div class="text-danger" style="margin: 1%;" *ngIf="isValidField('telefono')">
+              {{getErrorMessage("telefono")}}
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Correo <span class="text-muted"></span></label>
+            <input class="form-control" type="tel" formControlName="correo" placeholder="MiCorreo@mail">
+            <div class="text-danger" *ngIf="isValidField('correo')">
+              {{getErrorMessage("correo")}}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12">
+          <label class="form-label" for="inputState">Estatus</label>
+          <select class="form-control" formControlName="estatus">
+            <option *ngFor="let item of lstestatus" value={{item.id_Estatus}}>
+              {{item.nombre}}</option>
+          </select>
+          <div class="text-danger" *ngIf="isValidField('estatus')">
+            {{getErrorMessage("estatus")}}
+          </div>
+        </div>
+        <hr>
+        <button *ngIf="id>0" class="w-100 btn btn-dark btn-md" (click)="EditEmpleado()" type="submit"
+          [disabled]="!EmpleadoForm.valid">
+          Editar empleado</button>
+        <button *ngIf="id===0" class="w-100 btn btn-dark btn-md" (click)="addEmpleado()" type="submit"
+          [disabled]="!EmpleadoForm.valid">
+          Crear empleado</button>
+        <hr class="my-4">
+      </form>

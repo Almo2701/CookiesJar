@@ -1,0 +1,41 @@
+<hr class="my-4">
+<h1 class="h2" style="margin: auto;">Formulario de Estatus</h1>
+<hr class="my-4">
+<div class="container">
+
+  <div class="row g-3" style="margin: auto;">
+
+    <div class="col-md-7 col-lg-8">
+
+      <form [formGroup]="EstatusForm">
+        <div class="row g-3">
+          <div class="col-sm-12">
+            <label class="form-label">Nombre</label>
+            <input class="form-control" placeholder="Ingrese un nombre" value="" required formControlName="nombre">
+            <div class="text-danger" *ngIf="isValidField('nombre')">
+              {{getErrorMessage("nombre")}}
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <label class="form-label">Descripcion</label>
+            <textarea class="form-control" rows="5"
+            formControlName="descripcion"
+             placeholder="Ingrese una descripcion" value="" required></textarea>
+            <div class="text-danger" *ngIf="isValidField('descripcion')">
+              {{getErrorMessage("descripcion")}}
+            </div>
+          </div>
+
+
+
+        </div>
+        <hr>
+        <button *ngIf="id>0" class="w-100 btn btn-dark btn-md" (click)="EditEstatus()" type="submit"
+          [disabled]="!EstatusForm.valid">
+          Editar estatus</button>
+        <button *ngIf="id===0" class="w-100 btn btn-dark btn-md" (click)="addEstatus()" type="submit"
+          [disabled]="!EstatusForm.valid">
+          Crear estatus</button>
+        <hr class="my-4">
+      </form>
